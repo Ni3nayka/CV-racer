@@ -2,16 +2,22 @@
 # https://codingwithfun.com/pip/pupil-apriltags/521805/
 # python3 -m pip install --upgrade pip setuptools wheel
 # pip install pupil-apriltags
+# pip3 install opencv-python
 
 # import the necessary packages
-import apriltag
+# import pupil_apriltags
+# import apriltag
 import argparse
 import cv2
+print("[INFO] lib end")
 # construct the argument parser and parse the arguments
 ap = argparse.ArgumentParser()
 ap.add_argument("-i", "--image", required=True,
 	help="path to input image containing AprilTag")
+print("!")
+print(ap.parse_args())
 args = vars(ap.parse_args())
+print("!")
 
 # load the input image and convert it to grayscale
 print("[INFO] loading image...")
