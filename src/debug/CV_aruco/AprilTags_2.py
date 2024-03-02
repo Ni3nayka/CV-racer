@@ -12,8 +12,18 @@ import numpy as np
 from pupil_apriltags import Detector
 
 cap = cv2.VideoCapture(1)
-at_detector = Detector(families='tag36h11 tag25h9')
+# at_detector = Detector(families='tag36h11 tag25h9')
 # at_detector = apriltag.Detector(families='tag36h11 tag25h9')  #for windows
+
+at_detector = Detector(
+   families="tag36h11",
+   nthreads=1,
+   quad_decimate=1.0,
+   quad_sigma=0.0,
+   refine_edges=1,
+   decode_sharpening=0.25,
+   debug=0
+)
 
 i=0
 while(1):
@@ -29,6 +39,8 @@ while(1):
          # Обнаружение апрельдж
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     tags = at_detector.detect(gray)
+    try: print(tags[0])
+    except IndexError: pass
     for tag in tags:
         cv2.circle(frame, tuple(tag.corners[0].astype(int)), 4, (255, 0, 0), 2) # left-top
         cv2.circle(frame, tuple(tag.corners[1].astype(int)), 4, (255, 0, 0), 2) # right-top
